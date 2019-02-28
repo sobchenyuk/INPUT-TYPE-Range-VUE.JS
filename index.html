@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>INPUT TYPE Range VUE.JS</title>
+
+	<style>
+		:focus {
+			outline: -webkit-focus-ring-color auto 0
+		}
+		.container {
+			margin: 2em;
+		}
+		* {
+			font-family: sans-serif;
+		}
+		input[type='range'] {
+			overflow: hidden;
+			-webkit-appearance: none;
+			background-color: #fff;
+			height: 10px;
+			position: absolute;
+			top: -2px;
+			left: -2px;
+		}
+
+		input[type='range']::-webkit-slider-runnable-track {
+			height: 10px;
+			-webkit-appearance: none;
+			color: #13bba4;
+			margin-top: -1px;
+			cursor: pointer;
+			animate: 0.3s;
+			width: 100%;
+			box-shadow: 0 0 0;
+			/*box-shadow: 1px 1px 1px #000000, 0 0 1px #0d0d0d;*/
+			z-index: 10;
+		}
+
+		input[type='range']::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			height: 36px;
+			width: 16px;
+			background: transparent;
+			cursor: pointer;
+			-webkit-appearance: none;
+			margin-top: -14px;
+			box-sizing: content-box;
+		}
+		input[type='range'] {
+			transition: 1s
+		}
+
+		.slider-track {
+			height: 10px;
+			width: 100%;
+			margin-top: -5px;
+			top: 50%;
+			left: 0;
+			position: absolute;
+			cursor: pointer;
+			border: 1px solid #BABABA;
+		}
+		.slider-selection {
+			background: #BABABA;
+			height: 10px;
+			position: absolute;
+			z-index: 1;
+			transition: .5s;
+		}
+		.componet-range {
+			position: relative;
+		}
+
+	</style>
+
+
+	<link rel="stylesheet"
+		  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+
+</head>
+<body>
+
+<div id="app" class="container">
+
+	<h1>
+		INPUT TYPE Range VUE.JS
+	</h1>
+	<div class="componet-range" v-bind:style="{ width: `${width}px` }">
+
+		<div class="slider-track">
+			<div
+				class="slider-selection"
+				v-bind:style="{left: 0, width: `${setPercent}%`}"
+			></div>
+			<input
+				type="range"
+				v-model="range"
+				max="100"
+				style="width: 100%"
+				@change="inputChange"
+			/>
+		</div>
+
+	</div>
+
+	<br />
+	<br />
+
+	<div class="button_group">
+		<button type="button"
+				@click="playTrack">
+			play
+		</button>
+		<button type="button"
+				@click="pauseTrack">
+			pause
+		</button>
+		<button type="button"
+				@click="stopTrack">
+			stop
+		</button>
+	</div>
+
+	<br>
+	Current Time Audio: {{ currentTime }}
+
+	<br>
+	<pre><code class="plaintext">
+<------ html ----->
+		&lt;div class=&quot;componet-range&quot; v-bind:style=&quot;{ width: `${width}px` }&quot;&gt;
+
+   &lt;div class=&quot;slider-track&quot;&gt;
+      &lt;div
+         class=&quot;slider-selection&quot;
+         v-bind:style=&quot;{left: 0, width: `${setPercent}%`}&quot;
+      &gt;&lt;/div&gt;
+      &lt;input
+         type=&quot;range&quot;
+         v-model=&quot;range&quot;
+         max=&quot;100&quot;
+         style=&quot;width: 100%&quot;
+         @change=&quot;inputChange&quot;
+      /&gt;
+   &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;br /&gt;
+&lt;br /&gt;
+
+&lt;div class=&quot;button_group&quot;&gt;
+   &lt;button type=&quot;button&quot;
+         @click=&quot;playTrack&quot;&gt;
+      play
+   &lt;/button&gt;
+   &lt;button type=&quot;button&quot;
+         @click=&quot;pauseTrack&quot;&gt;
+      pause
+   &lt;/button&gt;
+   &lt;button type=&quot;button&quot;
+         @click=&quot;stopTrack&quot;&gt;
+      stop
+   &lt;/button&gt;
+&lt;/div&gt;
+
+
+<------ style ----->
+&lt;style&gt;
+   :focus {
+      outline: -webkit-focus-ring-color auto 0
+   }
+   .container {
+      margin: 2em;
+   }
+   * {
+      font-family: sans-serif;
+   }
+   input[type=&#39;range&#39;] {
+      overflow: hidden;
+      -webkit-appearance: none;
+      background-color: #fff;
+      height: 10px;
+      position: absolute;
+      top: -2px;
+      left: -2px;
+   }
+
+   input[type=&#39;range&#39;]::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      color: #13bba4;
+      margin-top: -1px;
+      cursor: pointer;
+      animate: 0.3s;
+      width: 100%;
+      box-shadow: 0 0 0;
+      /*box-shadow: 1px 1px 1px #000000, 0 0 1px #0d0d0d;*/
+      z-index: 10;
+   }
+
+   input[type=&#39;range&#39;]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 36px;
+      width: 16px;
+      background: transparent;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -14px;
+      box-sizing: content-box;
+   }
+   input[type=&#39;range&#39;] {
+      transition: 1s
+   }
+
+   .slider-track {
+      height: 10px;
+      width: 100%;
+      margin-top: -5px;
+      top: 50%;
+      left: 0;
+      position: absolute;
+      cursor: pointer;
+      border: 1px solid #BABABA;
+   }
+   .slider-selection {
+      background: #BABABA;
+      height: 10px;
+      position: absolute;
+      z-index: 1;
+      transition: .5s;
+   }
+   .componet-range {
+      position: relative;
+   }
+
+&lt;/style&gt;
+
+<------ script ----->
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+
+   var app = new Vue({
+      el: &#39;#app&#39;,
+      data: {
+         range: 0,
+         width: 1000,
+         audio: new Audio(),
+         duration: 0,
+         currentTime: 0
+      },
+      created() {
+         var _this = this;
+         this.audio.src = &#39;song.mp3&#39;;
+
+         this.audio.addEventListener(&#39;timeupdate&#39;, ()=&gt; {
+            this.currentTime = this.audio.currentTime;
+         });
+
+         this.audio.addEventListener(&#39;loadedmetadata&#39;, (event) =&gt; {
+            this.duration = this.audio.duration;
+         });
+      },
+      methods: {
+         playTrack() {
+            this.audio.play();
+         },
+         stopTrack() {
+            this.audio.pause();
+            this.audio.currentTime = 0;
+         },
+         pauseTrack() {
+            this.audio.pause();
+         },
+         inputChange() {
+            this.audio.currentTime = this.range / this.duration
+         }
+      },
+      computed: {
+         setPercent() {
+            var percent = this.currentTime / this.duration * 100;
+            this.range = parseInt(percent);
+            return percent;
+         }
+      }
+   });
+
+&lt;/script&gt;</code></pre>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+
+<script>
+
+	var app = new Vue({
+		el: '#app',
+		data: {
+			range: 0,
+			width: 1000,
+			audio: new Audio(),
+			duration: 0,
+			currentTime: 0
+		},
+		created() {
+			var _this = this;
+			this.audio.src = 'song.mp3';
+
+			this.audio.addEventListener('timeupdate', ()=> {
+				this.currentTime = this.audio.currentTime;
+			});
+
+			this.audio.addEventListener('loadedmetadata', (event) => {
+				this.duration = this.audio.duration;
+			});
+		},
+		methods: {
+			playTrack() {
+				this.audio.play();
+			},
+			stopTrack() {
+				this.audio.pause();
+				this.audio.currentTime = 0;
+			},
+			pauseTrack() {
+				this.audio.pause();
+			},
+			inputChange() {
+				this.audio.currentTime = this.range / this.duration
+			}
+		},
+		computed: {
+			setPercent() {
+				var percent = this.currentTime / this.duration * 100;
+				this.range = parseInt(percent);
+				return percent;
+			}
+		}
+	});
+
+</script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>
